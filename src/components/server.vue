@@ -111,6 +111,7 @@ export default {
 }
 .domains-style{
 	font-weight: bold;
+	display: flex;
 }
 .domain-width{
 	width: 100%;

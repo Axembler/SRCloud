@@ -266,7 +266,7 @@ export default {
 	max-width: 20%;
 	height: 100%;
 	position: relative;
-	padding-left: 50px;
+	padding-left: 20px;
 }
 .main-rating{
 	max-height: 640px;
@@ -275,7 +275,7 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	padding-right: 40px;
+	padding-right: 20px;
 }
 .frog{
 	position: absolute;
