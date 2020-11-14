@@ -33,7 +33,6 @@
 import vServers from './components/to-servers.vue'
 import vTeams from './components/to-teams.vue'
 import vProjects from './components/to-projects.vue'
-
 export default{
 	data(){
 		return{
@@ -79,7 +78,6 @@ export default{
     font-weight: bold;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'Gotham Pro';
     src: url('assets/fonts/GothamPro.ttf');

@@ -10,34 +10,11 @@
 				</div>
 			</div>
 			<div class="filters">
-				<div class="filter" :class="{active:isDevOps}" @click="isDevOps=!isDevOps; isFlutter=false; isGoLang=false; isPython=false; isDjango=false; isJavaScript=false; isPHP=false; filter='DevOps'; test()">
-					<img class="filter-icon-teams" src="../assets/DevOps.png">
-					<span>&nbsp;DevOps</span>
+				<div class="filter" v-for="f in filters" :key="f.filt" :class="{active: filter === f.filt}" @click="changeFilter(f.filt)">
+					<img class="filter-icon-teams" :src="require(`../assets/${f.filt}.png`)">
+					<span>&nbsp;{{f.filt}}</span>
 				</div>
-				<div class="filter" :class="{active:isFlutter}" @click="isFlutter=!isFlutter; isDevOps=false; isGoLang=false; isPython=false; isDjango=false; isJavaScript=false; isPHP=false; filter='Flutter'; test()">
-					<img class="filter-icon-teams" src="../assets/Flutter.png">
-					<span>&nbsp;Flutter</span>
-				</div>
-				<div class="filter" :class="{active:isGoLang}" @click="isGoLang=!isGoLang; isDevOps=false; isFlutter=false; isPython=false; isDjango=false; isJavaScript=false; isPHP=false; filter='GoLang'">
-					<img class="filter-icon-teams" src="../assets/GoLang.png">
-					<span>&nbsp;GoLang</span>
-				</div>
-				<div class="filter" :class="{active:isPython}" @click="isPython=!isPython; isDevOps=false; isGoLang=false; isFlutter=false; isDjango=false; isJavaScript=false; isPHP=false; filter='Python'">
-					<img class="filter-icon-teams" src="../assets/Python.png">
-					<span>&nbsp;Python</span>
-				</div>
-				<div class="filter" :class="{active:isDjango}" @click="isDjango=!isDjango; isDevOps=false; isGoLang=false; isPython=false; isFlutter=false; isJavaScript=false; isPHP=false; filter='Django'">
-					<img class="filter-icon-teams" src="../assets/Django.png">
-					<span>&nbsp;Django</span>
-				</div>
-				<div class="filter" :class="{active:isJavaScript}" @click="isJavaScript=!isJavaScript; isDevOps=false; isGoLang=false; isPython=false; isDjango=false; isFlutter=false; isPHP=false; filter='JavaScript'">
-					<img class="filter-icon-teams" src="../assets/JavaScript.png">
-					<span>&nbsp;JavaScript</span>
-				</div>
-				<div class="filter" :class="{active:isPHP}" @click="isPHP=!isPHP; isDevOps=false; isGoLang=false; isPython=false; isDjango=false; isJavaScript=false; isFlutter=false; filter='PHP'">
-					<img class="filter-icon-teams" src="../assets/PHP.png">
-					<span>&nbsp;PHP</span>
-				</div>
+
 				<div class="filter">
 					<img class="filter-icon" src="../assets/Group52.png">
 				</div>
@@ -80,7 +57,16 @@ export default {
 			isDjango: false,
 			isJavaScript: false,
 			isPHP: false,
-			filter: '',
+			filter: null,
+			filters: [
+				{ filt: 'GoLang' },
+				{ filt: 'JavaScript' },
+				{ filt: 'PHP' },
+				{ filt: 'Flutter' },
+				{ filt: 'Django' },
+				{ filt: 'Python' },
+				{ filt: 'DevOps' }
+			],
 			teams:[
 			{
 				team_number: '1',
@@ -223,28 +209,32 @@ export default {
 	components: {team, rating},
 	computed:{
 		teamsByAreas(){
-			return this.teams
+			if (!this.filter){ return this.teams }
+			let kakoy_nibud = []
+			this.teams.forEach((item) => {
+				if (item.areas.includes(this.filter)){
+					kakoy_nibud.push(item)
+				}
+			})
+			return kakoy_nibud
+		}
+	},
+	methods:{
+		changeFilter(filter){
+			if (this.filter === filter){this.filter = null}
+			else {this.filter = filter}
 		}
 	}
-	// Сортировка по картинкам
-	// methods:{
-	// 	test(){
-	// 		let filtered = []
-	// 		this.teams.forEach((item) => {
-	// 			console.log(item.areas)
-	// 		})
-	// 		return filtered
-	// 	}
-	// }
 }
 </script>
 
 <style>
 .teams{
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	max-width: 80%;
 	flex-wrap: wrap;
+	width: 100%;
 }
 .grid-template-columns: {
 	display: flex;
@@ -276,6 +266,7 @@ export default {
 	max-width: 20%;
 	height: 100%;
 	position: relative;
+	padding-left: 50px;
 }
 .main-rating{
 	max-height: 640px;

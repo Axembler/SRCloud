@@ -40,7 +40,7 @@ export default {
 }
 .box_team{
 	align-items: center;
-	margin: 30px;
+	margin: 0 30px 30px 0;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
@@ -65,6 +65,7 @@ export default {
 }
 .team-icon{
 	width: 125px;
+	height: 125px;
 	padding: 5px;
 	border-radius: 50%;
 	margin-left: 8px;

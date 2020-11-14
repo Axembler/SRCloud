@@ -168,7 +168,7 @@ export default {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	max-width: 76%;
+	max-width: 80%;
 	align-items: center;
 }
 .filters{
@@ -207,6 +207,7 @@ h3{
 	max-width: 20%;
 	height: 100%;
 	position: relative;
+	padding-left: 50px;
 }
 .main-story{
 	max-height: 620px;
